@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Home | Hassan Shahbazi</title>
+    <link>http://hassan-shahbazi.github.io/posts/</link>
+    <description>Recent content in Posts on Home | Hassan Shahbazi</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 17 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://hassan-shahbazi.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Swift &#43; WebAssembly</title>
+      <link>http://hassan-shahbazi.github.io/posts/swift/</link>
+      <pubDate>Sat, 17 Oct 2020 00:00:00 +0000</pubDate>
+      
+      <guid>http://hassan-shahbazi.github.io/posts/swift/</guid>
+      <description>Write once, Run anywhere has been a dream for decades among software companies and developers. The idea of removing duplicated code is not just about doing most with least costs, but also about avoiding disasters of forgetting to update all copies. If you have ever contributed in a large-scale software project (even in a small one), you probably have seen how different teams try to centralize core solutions and algorithms to avoid duplication.</description>
+    </item>
+    
+  </channel>
+</rss>
