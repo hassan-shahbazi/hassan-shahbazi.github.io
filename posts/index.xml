@@ -6,7 +6,16 @@
     <description>Recent content in Posts on Home | Hassan Shahbazi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 17 Oct 2020 00:00:00 +0000</lastBuildDate><atom:link href="http://hassan-shahbazi.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://hassan-shahbazi.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A New Era</title>
+      <link>http://hassan-shahbazi.github.io/posts/new-design/</link>
+      <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://hassan-shahbazi.github.io/posts/new-design/</guid>
+      <description>On the last day of February 2021, I decided to improve how my website looks and feels. The old version was nice, but it was full of useless information and details. I was looking for a minimalist place to share my knowledge, link my social accounts and emails, and help people know me better as a developer and human being. Since I&amp;rsquo;m not a fan of heavy animations and fancy UI components, I got impressed extensively by simple examples such as Timo Savola and Sameer Rahmani.</description>
+    </item>
+    
     <item>
       <title>Swift &#43; WebAssembly</title>
       <link>http://hassan-shahbazi.github.io/posts/swift/</link>
