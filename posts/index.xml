@@ -28,10 +28,10 @@ I started to study Linux Kernel in 2020, and have tried to make few patches.</de
     
     <item>
       <title>Swift &#43; WebAssembly</title>
-      <link>https://shahbazi.fi/posts/swift&#43;wasm/</link>
+      <link>https://shahbazi.fi/posts/swiftwasm/</link>
       <pubDate>Sat, 17 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>https://shahbazi.fi/posts/swift&#43;wasm/</guid>
+      <guid>https://shahbazi.fi/posts/swiftwasm/</guid>
       <description>Write once, Run anywhere has been a dream for decades among software companies and developers. The idea of removing duplicated code is not just about doing most with least costs, but also about avoiding disasters of forgetting to update all copies. If you have ever contributed in a large-scale software project (even in a small one), you probably have seen how different teams try to centralize core solutions and algorithms to avoid duplication.</description>
     </item>
     
