@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Home | Hassan Shahbazi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 28 Feb 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://hassan-shahbazi.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://hassan-shahbazi.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kernel Patches</title>
+      <link>http://hassan-shahbazi.github.io/posts/kernel-patch/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0000</pubDate>
+      
+      <guid>http://hassan-shahbazi.github.io/posts/kernel-patch/</guid>
+      <description>I like spending time on open-source projects. My GitHub profile is full of libraries and tutorials I have made during past years. On top of all, I have a big passion for Linux and the community behind it. In my opinion, Linux is one of the most important and game-changer projects during the history of Computer Science.
+I started to study Linux Kernel in 2020, and have tried to make few patches.</description>
+    </item>
+    
     <item>
       <title>A New Era</title>
       <link>http://hassan-shahbazi.github.io/posts/new-design/</link>
@@ -18,10 +28,10 @@
     
     <item>
       <title>Swift &#43; WebAssembly</title>
-      <link>http://hassan-shahbazi.github.io/posts/swift/</link>
+      <link>http://hassan-shahbazi.github.io/posts/swift&#43;wasm/</link>
       <pubDate>Sat, 17 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://hassan-shahbazi.github.io/posts/swift/</guid>
+      <guid>http://hassan-shahbazi.github.io/posts/swift&#43;wasm/</guid>
       <description>Write once, Run anywhere has been a dream for decades among software companies and developers. The idea of removing duplicated code is not just about doing most with least costs, but also about avoiding disasters of forgetting to update all copies. If you have ever contributed in a large-scale software project (even in a small one), you probably have seen how different teams try to centralize core solutions and algorithms to avoid duplication.</description>
     </item>
     
