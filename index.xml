@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Home | Hassan Shahbazi</title>
-    <link>http://hassan-shahbazi.github.io/</link>
-    <description>Recent content on Home | Hassan Shahbazi</description>
+    <title>Hassan Shahbazi</title>
+    <link>https://shahbazi.fi/</link>
+    <description>Recent content on Hassan Shahbazi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="http://hassan-shahbazi.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Kernel Patches</title>
-      <link>http://hassan-shahbazi.github.io/posts/kernel-patch/</link>
+      <link>https://shahbazi.fi/posts/kernel-patch/</link>
       <pubDate>Sat, 06 Mar 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://hassan-shahbazi.github.io/posts/kernel-patch/</guid>
+      <guid>https://shahbazi.fi/posts/kernel-patch/</guid>
       <description>I like spending time on open-source projects. My GitHub profile is full of libraries and tutorials I have made during past years. On top of all, I have a big passion for Linux and the community behind it. In my opinion, Linux is one of the most important and game-changer projects during the history of Computer Science.
 I started to study Linux Kernel in 2020, and have tried to make few patches.</description>
     </item>
     
     <item>
       <title>A New Era</title>
-      <link>http://hassan-shahbazi.github.io/posts/new-design/</link>
+      <link>https://shahbazi.fi/posts/new-design/</link>
       <pubDate>Sun, 28 Feb 2021 00:00:00 +0000</pubDate>
       
-      <guid>http://hassan-shahbazi.github.io/posts/new-design/</guid>
+      <guid>https://shahbazi.fi/posts/new-design/</guid>
       <description>On the last day of February 2021, I decided to improve how my website looks and feels. The old version was nice, but it was full of useless information and details. I was looking for a minimalist place to share my knowledge, link my social accounts and emails, and help people know me better as a developer and human being. Since I&amp;rsquo;m not a fan of heavy animations and fancy UI components, I got impressed extensively by simple examples such as Timo Savola and Sameer Rahmani.</description>
     </item>
     
     <item>
       <title>Swift &#43; WebAssembly</title>
-      <link>http://hassan-shahbazi.github.io/posts/swift&#43;wasm/</link>
+      <link>https://shahbazi.fi/posts/swift&#43;wasm/</link>
       <pubDate>Sat, 17 Oct 2020 00:00:00 +0000</pubDate>
       
-      <guid>http://hassan-shahbazi.github.io/posts/swift&#43;wasm/</guid>
+      <guid>https://shahbazi.fi/posts/swift&#43;wasm/</guid>
       <description>Write once, Run anywhere has been a dream for decades among software companies and developers. The idea of removing duplicated code is not just about doing most with least costs, but also about avoiding disasters of forgetting to update all copies. If you have ever contributed in a large-scale software project (even in a small one), you probably have seen how different teams try to centralize core solutions and algorithms to avoid duplication.</description>
     </item>
     
