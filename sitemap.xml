@@ -1,38 +1,24 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://shahbazi.fi/</loc>
     <lastmod>2021-03-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://shahbazi.fi/posts/kernel-patch/</loc>
     <lastmod>2021-03-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://shahbazi.fi/posts/</loc>
     <lastmod>2021-03-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://shahbazi.fi/posts/new-design/</loc>
     <lastmod>2021-02-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://shahbazi.fi/posts/swiftwasm/</loc>
+  </url><url>
+    <loc>https://shahbazi.fi/posts/swift&#43;wasm/</loc>
     <lastmod>2020-10-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://shahbazi.fi/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://shahbazi.fi/tags/</loc>
   </url>
-  
 </urlset>
