@@ -6,10 +6,16 @@
     <description>Recent content in Posts on Hassan Shahbazi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 21 Mar 2021 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://shahbazi.fi/posts/index.xml" rel="self" type="application/rss+xml" />
-    
+    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kernel Crash Fixed! Lessons Learned</title>
+      <link>https://shahbazi.fi/posts/kernel-crash-1/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shahbazi.fi/posts/kernel-crash-1/</guid>
+      <description>It all started back in January 2021, when I saw Greg&amp;rsquo;s tweet about a Kernel mentorship program for Spring 2021.
+It was a huge opportunity for me, who loves Linux and enjoys working on open-source. I had tried once to submit a patch, but it was rejected because I didn&amp;rsquo;t have the knowledge and skills. Therefore, I applied for the program so quickly that I didn&amp;rsquo;t even check the deadline and required tasks.</description>
+    </item>
     
     <item>
       <title>Kernel Patches</title>
