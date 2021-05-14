@@ -6,7 +6,16 @@
     <description>Recent content on Hassan Shahbazi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 01 Apr 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 May 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>An introduction to kernel (Farsi)</title>
+      <link>https://shahbazi.fi/posts/introduction-to-kernel/</link>
+      <pubDate>Fri, 14 May 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shahbazi.fi/posts/introduction-to-kernel/</guid>
+      <description>بسیار خوشوقتم که این فرصت رو در اختیار داشتم که در گروه جوانانی از ایران در گروه مشهدلاگ درباره کرنل چند دقیقه ای صحبت کنم. امیدوارم که این جلسه شروعی باشد برای جلسات بیشتر و عمیقتر در ماه ها و روزهای آینده، و همچنین و یک مشوقی باشد برای جوانان با استعداد و سخت کوش ایرانی برای مشارکت در توسعه کرنل. مطمئنا اضافه شدن گروه های پر انرژی به توسعه کرنل برای همگان مفید خواهد بود.</description>
+    </item>
+    
     <item>
       <title>Kernel Crash Fixed! Lessons Learned</title>
       <link>https://shahbazi.fi/posts/kernel-crash-1/</link>
