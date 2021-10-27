@@ -6,11 +6,30 @@
     <description>Recent content on Hassan Shahbazi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 27 Oct 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>On Meditation Leave - Until 2022 Jan 1st</title>
+      <link>https://shahbazi.fi/posts/meditation/</link>
+      <pubDate>Wed, 27 Oct 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shahbazi.fi/posts/meditation/</guid>
+      <description>In my culture, or to be more precise, in Islamic culture, there is an approach to meditate and &amp;ldquo;clean&amp;rdquo; yourself by doing (or repeating) a behaviour for 40 days. It is called 40ish method, or what we call it in Persian, Chelle Neshini. This is not only in Islam, but in many other religious there is a same sort of instruction. Although I&amp;rsquo;m not a religious man and this doesn&amp;rsquo;t aim to improve my relation with God, I think I would like to give it a try.</description>
+    </item>
+    
+    <item>
+      <title>Kernel Crash Fixed! Lessons Learned</title>
+      <link>https://shahbazi.fi/posts/kernel-crash-1/</link>
+      <pubDate>Thu, 01 Apr 2021 00:00:00 +0000</pubDate>
+      
+      <guid>https://shahbazi.fi/posts/kernel-crash-1/</guid>
+      <description>It all started back in January 2021, when I saw Greg&amp;rsquo;s tweet about a Kernel mentorship program for Spring 2021.
+It was a huge opportunity for me, a developer who loves Linux and enjoys working on open-source. Indeed, I had tried once to submit a patch, but it was rejected because I didn&amp;rsquo;t have the required knowledge for working on Kernel. Therefore, I applied for the program so quickly that I didn&amp;rsquo;t even check the deadline and required tasks.</description>
+    </item>
+    
     <item>
       <title>Kernel Patches</title>
       <link>https://shahbazi.fi/posts/kernel-patch/</link>
-      <pubDate>Sat, 06 Mar 2021 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 21 Mar 2021 00:00:00 +0000</pubDate>
       
       <guid>https://shahbazi.fi/posts/kernel-patch/</guid>
       <description>I like spending time on open-source projects. My GitHub profile is full of libraries and tutorials I have made during past years. On top of all, I have a big passion for Linux and the community behind it. In my opinion, Linux is one of the most important and game-changer projects during the history of Computer Science.

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    
+    <title>Hassan Shahbazi</title>
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-190778333-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</head>
+
+
+<html>
+<h1>Kernel Crash Fixed! Lessons Learned</h1>
+<p class="post-meta">
+    <time itemprop="datePublished">
+        <code>April 1, 2021</code>
+        <a class="muted small" href="https://shahbazi.fi/"><code>&nbsp; by Hassan Shahbazi</code></a>
+    </time>
+</p>
+
+<p>It all started back in January 2021, when I saw Greg&rsquo;s tweet about a Kernel mentorship program for Spring 2021.</p>
+<p><img src="https://raw.githubusercontent.com/hassan-shahbazi/hassan-shahbazi.github.io/master/images/greg-kernel.png" alt="@gregkh"></p>
+<p>It was a huge opportunity for me, a developer who loves Linux and enjoys working on open-source. Indeed, I had tried once to submit a patch, but it was rejected because I didn&rsquo;t have the required knowledge for working on Kernel. Therefore, I applied for the program so quickly that I didn&rsquo;t even check the deadline and required tasks. Those tasks included contributing to Kernel, completing code challenges, reproducing crashes, and writing reports about all of the mentioned activities. There were a lot of tasks, and the deadline was about to due.</p>
+<p>Among all required tasks, the most interesting ones for me were those I got from <a href="http://eudyptula-challenge.org/">Little Penguin</a>[1]. The other one that got my attention more than others was about studying and reproducing Kernel crashes reported on <a href="https://syzkaller.appspot.com/upstream">syzbot</a>. <strong>syzbot</strong> is a fuzzy continuous bot that tests Kernel branches and generates crash reports automatically. Such an amazing place to study! Although I was not chosen for the program (simply because I was too busy as a full-time student and developer to make a new commitment), I never stopped following reported bugs on <em>syzbot</em>.</p>
+<p>After some weeks of being busy with writing my Master Thesis report, I got some free time to work on a <strong>NULL pointer deference crash</strong> <a href="https://syzkaller.appspot.com/bug?id=defb47bf56e1c14d5687280c7bb91ce7b608b94b">report</a> that was recently reported. When I checked the bug, I saw it contains all the required material for a bug. A crash report with stack trace, <em>syz</em> and <em>C</em> reproducers, and the config that builds the same Kernel as what <em>syzbot</em> had tested.</p>
+<p>The first patch I wrote was a horrible mistake. I had not even tested it before I sent it. I blindly just made an assumption that the <em>syzbot</em>&rsquo;s stack trace has shown the culprit and I just need to add one <code>if</code> statement to ensure the instance is not <code>NULL</code> when it is called. However, I was too naive. My patch did not resolve the crash. It was tested by other developers[2] and <em>syzbot</em> which both showed the bugs still occurred. <em>&ldquo;I can&rsquo;t afford another silly mistake in this path&rdquo;</em>, I told myself.</p>
+<p>I had made a mistake, but it was not an end to my passion. Instead, I decided to make a <em>good</em> patch for the same crash. It was not important anymore if the crash was resolved by others (which was not), it was important for me to fix it on my side. I decided to test the patch both locally and with <em>syzbot</em> next time <em>before</em> I send it. But how could I test a patch? Should I make my own Kernel crash?</p>
+<p>Fortunately no, I should not. The solution was to build Kernel (using the same config from the crash report[3]), load it in a virtual machine (qemu, vmware, virtual box), run the reproducer, and see it crashes. Although it took some days for me to reproduce the crash, the result was good. I could make Kernel crash using the provided <em>C</em> reproducer.</p>
+<p><img src="https://raw.githubusercontent.com/hassan-shahbazi/hassan-shahbazi.github.io/master/images/kernel-crashed.png" alt="kernel-crashed!"></p>
+<p>Now it was time to make the patch. I noticed the stack trace that I get from the local reproducer had one more step, the guilty line was placed in another file. It was not surprising that the old patch did not work, it was pointing to an invalid point!. After several tries (each included adding <code>pr_info</code> messages, rebuilding Kernel, loading in qemu, running the reproducer, checking the Kernel messages), I could find and patch the line that caused the crash. The patch was successfully tested both on my local virtual machine and <em>syzbot</em>.</p>
+<p>I submitted the <a href="https://www.mail-archive.com/linux-kernel@vger.kernel.org/msg2533494.html">patch</a> to Greg. He kindly got back to me soon with some questions about the root cause. I didn&rsquo;t know about the <strong>root cause</strong>. I just reproduced the crash and fixed the culprit line, but I never thought about the <strong>root cause</strong>. Now that I am writing this report the patch has been rejected, mainly because we need to find the root cause that has made the crash happen. We don&rsquo;t need painkillers, we need to cure the illness.</p>
+<p>Although the patch was rejected, there are valuable lessons I learned in this path.</p>
+<ul>
+<li>Never submit a patch you have not tested yourself.</li>
+<li>Look for the <strong>root cause</strong>. We don&rsquo;t need painkillers.</li>
+<li>Working on Kernel needs practicing. You can&rsquo;t give up every time your patch is rejected.</li>
+<li>Sometimes fixing a very simple bug may require hours of debugging and reading the code.</li>
+<li>Online tools such as GitHub are useful tools to search within Kernel code.</li>
+</ul>
+<hr>
+<p>Footnotes</p>
+<ul>
+<li><em>[1] you can find the ones I did in <a href="https://github.com/hassan-shahbazi/kernel-workspace">this repository</a></em></li>
+<li><em>[2] Du Heng <a href="mailto:ducheng2@gmail.com">ducheng2@gmail.com</a>, Fatih Yildirim <a href="mailto:yildirim.fatih@gmail.com">yildirim.fatih@gmail.com</a></em></li>
+<li><em>[3] Thanks to Dmitry Vyukov <a href="mailto:dvyukov@google.com">dvyukov@google.com</a> for <a href="https://groups.google.com/g/syzkaller/c/qOMU5DjtS2w">helping</a> me on this</em></li>
+</ul>
+
+<footer>
+</footer>
+
+</html>
