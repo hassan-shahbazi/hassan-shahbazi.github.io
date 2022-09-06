@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 06 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>About Standards in Software</title>
-      <link>https://shahbazi.fi/posts/standards-in-se/</link>
+      <link>https://shahbazi.fi/posts/standards/</link>
       <pubDate>Tue, 06 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://shahbazi.fi/posts/standards-in-se/</guid>
+      <guid>https://shahbazi.fi/posts/standards/</guid>
       <description>We, as human being, would like to explain the world we are living in with the simplest possible rules. That is why physicists are looking to find a theory to explain everything. The same motivations are found among other fields&amp;rsquo; experts, including Software Engineers.
 This is, however, a bit different in the SE industry. Here, experts are trying to find an optimal way to make software development easy, efficient, and reliable.</description>
     </item>
