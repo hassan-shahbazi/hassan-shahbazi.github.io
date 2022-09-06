@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    
+    <title>Hassan Shahbazi</title>
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-190778333-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</head>
+
+
+<html>
+<h1>About Standards in Software</h1>
+<p class="post-meta">
+    <time itemprop="datePublished">
+        <code>September 6, 2022</code>
+        <a class="muted small" href="https://shahbazi.fi/"><code>&nbsp; by Hassan Shahbazi</code></a>
+    </time>
+</p>
+
+<p>We, as human being, would like to explain the world we are living in with the simplest possible rules. That is why physicists are looking to find a theory to explain everything. The same motivations are found among other fields&rsquo; experts, including Software Engineers.</p>
+<p>This is, however, a bit different in the SE industry. Here, experts are trying to find an optimal way to make software development easy, efficient, and reliable. Since we are living in a world surrounded by software, these efforts can someday make the world a better and reliable place to live. In this article, I would like to point that why sometimes we are looking into a wrong direction and to name some basic factors that are ignored when people try to generalise rules and practices.</p>
+<h3 id="software-involves-people">Software Involves People</h3>
+<p>Simple but mostly forgotten. We are people, working on something that is going to be in touch with, well, people. We are different, depending on many factors including the culture we all have grown up in. No software is developed without people (yet!), and we have to know with whom we are working and who are our products&rsquo; targets. I would like to explain my point with an example.</p>
+<p>Coming form a country with a Right-to-Left language, I can assure you that challenges for developing a product RTL language support is in another level. Many platforms/tools are not yet adopted to the fact that some people in the world, might use a different direction for writing or reading contents. Any developer/team working in such an environment needs to define and resolve issues that are already <em>explained by the rule</em>. Again, as an example, we have no git commit message paradigm for such languages and these teams must come up with a way to ensure messages are both readable and comprehensive while kept short.</p>
+<h3 id="priorities">Priorities</h3>
+<p>I had the chance to work for a decade with many different teams, and yet, I have rarely witnessed same set of problems. Every product is developed to address a specific problem, which may or may not have anything in common with others. This doesn&rsquo;t mean we can have no rules, but it means we need flexibility. As an example, choosing an Agile methodology might be a game changer for a company with time-to-market priorities, but it doesn&rsquo;t probably work for a governmental project that such a priority does not exist at all.</p>
+<h3 id="scale">Scale</h3>
+<p>This is probably the most obvious point in this article. Different scales require different approaches. When you are working in a startup with less than 25 people, which all of them are not necessarily involved in developing the same product, the story is completely different with a company where you have a team of 50 working on a shared codebase. Communication is the most important part of our job, but it is the scale which determines how to communicate. Let me give another example for this point, just in case it is not clear for some:</p>
+<p>I have worked with teams who decided to adopt GitFlow strategy for their repositories. That means they have a <code>master</code> branch holding the latest stable code, a <code>develop</code> branch containing the latest changes that might be unstable. Every feature is started by checking out a branch from <code>dev</code> and then, it is merged back into the parent branch using a <code>pull request</code> or <code>merge request</code>.</p>
+<p>While this has been widely accepted, I have seen other strategies, which to be honest, have proven to be more efficient in the context they were being used. For example, I was working on an iOS SDK that was released over Cocoapods. <em>(hint: to release a library over Cocoapods, you shall include a configuration file where inside that, you point to the tag on the repository you want to publish)</em> For such a case, there is no need to have a separated <code>dev</code> branch where the unstable latest changes are hold, because the master branch is never supposed to be publicly available without a tag. In fact, tagging was a way to avoid using a dedicated branch. The question is, will this strategy work for teams with multiple developers? Probably not. And that is the point I am talking in this point. Choosing a GitFlow strategy totally depends on the projects&rsquo; scale and team communications.</p>
+<h3 id="so-we-need-no-rules">So we need no rules?</h3>
+<p>I didn&rsquo;t say that. I tried to just name some (probably) obvious factors that having a <em>best practice</em> can mean different in every team or for different products. There are some very general rules, however, that no one can break. Things such as writing a testable, readable, maintainable, and efficient code doesn&rsquo;t depend on factors mentioned above, as well as having communication, trust, and team playing skills. But when it gets into more detailed rules, we need to consider flexibility and try not to judge others because they are not following how we work.</p>
+
+<footer>
+</footer>
+
+</html>
