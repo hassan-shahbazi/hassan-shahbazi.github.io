@@ -6,13 +6,23 @@
     <description>Recent content in Posts on Hassan Shahbazi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 06 Sep 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 04 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My ZSH Prompt</title>
+      <link>https://shahbazi.fi/posts/my-prompt/</link>
+      <pubDate>Sun, 04 Dec 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://shahbazi.fi/posts/my-prompt/</guid>
+      <description>If you are a person like me, who enjoys working with CLI for most of tasks, this post might be interesting to you. In this post, I would like to share and explain the prompt I have for zsh, which is fast, cross-platform, and with no dependencies.
+What is a prompt I don&amp;rsquo;t know the exact defination of it, but in short words, it is what you see when open a terminal window.</description>
+    </item>
+    
     <item>
       <title>About Standards in Software</title>
-      <link>https://shahbazi.fi/posts/standards/</link>
+      <link>https://shahbazi.fi/posts/standards-in-se/</link>
       <pubDate>Tue, 06 Sep 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://shahbazi.fi/posts/standards/</guid>
+      <guid>https://shahbazi.fi/posts/standards-in-se/</guid>
       <description>We, as human being, would like to explain the world we are living in with the simplest possible rules. That is why physicists are looking to find a theory to explain everything. The same motivations are found among other fields&amp;rsquo; experts, including Software Engineers.
 This is, however, a bit different in the SE industry. Here, experts are trying to find an optimal way to make software development easy, efficient, and reliable.</description>
     </item>

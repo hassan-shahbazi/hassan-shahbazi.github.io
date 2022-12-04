@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    
+    <title>Hassan Shahbazi</title>
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    
+	
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-190778333-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+</head>
+
+
+<html>
+<h1>My ZSH Prompt</h1>
+<p class="post-meta">
+    <time itemprop="datePublished">
+        <code>December 4, 2022</code>
+        <a class="muted small" href="https://shahbazi.fi/"><code>&nbsp; by Hassan Shahbazi</code></a>
+    </time>
+</p>
+
+<p>If you are a person like me, who enjoys working with CLI for most of tasks, this post might be interesting to you. In this post, I would like to share and explain the prompt I have for zsh, which is fast, cross-platform, and with no dependencies.</p>
+<h3 id="what-is-a-prompt">What is a prompt</h3>
+<p>I don&rsquo;t know the exact defination of it, but in short words, it is what you see when open a terminal window. It can contain information about different things, probably everything that you want. But most useful of them would be the directory you are in, some information about the <code>git</code> branch (or even the status), and even the date-time.</p>
+<p>This is why there are many options available for ricing your prompt for both Linux and macOS. While they are very easy to install and use, I&rsquo;d prefer to use my own configuration. But why?</p>
+<h3 id="but-why">But why?</h3>
+<p>There are different reasons for having your own prompt. For me, the most important one is to be able to set it up on a new machine with no dependencies to any other tools. That being said, I like to be able to have my prompt on any machine that is using <code>zsh</code>.</p>
+<p>However, this is not the only reason. Options such as <code>oh-my-zsh</code> are bloated in many ways, which result in slower performance in many cases. To see the differences, you can simply test the performance by trying to navigate to a big git repository such as the Linux Kernel. Then you&rsquo;ll see clearly the delay it takes for your prompt to appear.</p>
+<h3 id="ok-what-is-your-prompt-now">OK. What is your prompt now?</h3>
+<p>It is designed for my purposes, which may not be applicable to everybody. However, I believe it could be useful and <em>expandable</em> for many. It contains basic information:</p>
+<ul>
+<li><strong>Date and Time</strong>: This is an important information for me personally. I would like to see when I ran the last command and in some cases, how long did it take for me to go for the next command.</li>
+<li><strong>Current Path</strong>: Probably the most obvious one. I need to know in which path I am running the command. I certainly don&rsquo;t want to run <code>rm -rf</code> in a wrong place.</li>
+<li><strong>Git Branch</strong>: This is yet another very useful piece of info for me. I want to know on which branch I am working. I don&rsquo;t need to know the exact status of the repository, but I need to know I am working in the right branch. Also, it might be useful when I try to push a new branch to the remote, where I need to provide the branch name (<code>git push -u _remote_ _branch_</code>)</li>
+<li><strong>Time Spent For the Command</strong>: Shown when the command takes some seconds to be run. This info is very critical to me too. I need to know how long did it take for the command to be run. Though it can be also seen from the first info I mentioned, it is easier to have it as a specific info in the prompt.</li>
+</ul>
+<p>This is how my prompt looks in Linux. The same prompt is shown in macOS too.</p>
+<p><img src="https://raw.githubusercontent.com/hassan-shahbazi/hassan-shahbazi.github.io/master/images/zsh-prompt.png" alt="My Prompt"></p>
+<h3 id="i-love-it-how-can-i-have-it">I love it. How can I have it?</h3>
+<p>This is what makes my zsh prompt. In the upcoming parts, I explain each one briefly</p>
+<pre tabindex="0"><code>PROMPT=&#34;
+%B%{$fg[cyan]%}[%{$fg[yellow]%}%* %{$fg[cyan]%}%(4~|%-1~/.../%2~|%~)]
+%u%b%(?.%{$fg[green]%}.%{$fg[red]%})$%{$reset_color%}%b &#34;
+
+RPROMPT=&#34;%{${_lineup}%}%B%{$fg[cyan]%}\$vcs_info_msg_0_ %{$fg[yellow]%}\$elapsed%{${_linedown}%}&#34;
+</code></pre><h4 id="date-and-time">Date and Time</h4>
+<p>The first part of the prompt is date and time. It is being shown using <code>%*</code>, which simply means to shown date and time in long formats, up to the seconds. To make it more clear, I used <code>$fg[yellow]%</code> to use yellow color as the foreground color for this field.</p>
+<h4 id="path">Path</h4>
+<p>The second part shows the path up to 2 levels, meaning if the level exceeds 2, it shows &hellip; instead. It is shown using <code>4~|%-1~/.../%2~|%~</code>. Here, if you are in the home directory, it will simply shows a <code>~</code>.</p>
+<h4 id="prompt-sign">Prompt Sign</h4>
+<p>I prefer to show it in the next line, where I will have enough space for running longer commands without messing with the prompt. The prompt sign for me is a simple <code>$</code>, but the important part is to configure it to change color according to the previous command&rsquo;s result. So it will be red if the previous command failed, and green if it was succeed.</p>
+<h3 id="vcs-info">VCS Info</h3>
+<p>On the right side, I want to have git branch info. This is a bit tricky as I want to show info in the first line, not the line that I am typing my command. That&rsquo;s why I have used this variable which sets the prompt position to the upper line</p>
+<pre tabindex="0"><code>_lineup=$&#39;\e[1A&#39;
+</code></pre><p>Then it is the time to calculate the repositories&rsquo; information. This is done using zsh&rsquo;s built-in feature called <code>vcs_info</code>. To use it, make sure you load it, and specify what information you want to show:</p>
+<pre tabindex="0"><code>autoload -Uz vcs_info 
+zstyle &#39;:vcs_info:git:*&#39; formats &#39;[%b]&#39;
+</code></pre><h4 id="time-elapsed">Time Elapsed</h4>
+<p>The last part is to show how much time did it take for the command to be run. This one is probably the most manual part of the prompt. You should calculate the time it takes for the prompt to be executed (using <code>preexec</code>) until it will redraw (using <code>precmd</code>)</p>
+<pre tabindex="0"><code>preexec() {
+    cmd_start=&#34;$SECONDS&#34;
+}
+
+precmd() {
+    vcs_info
+
+    local cmd_end=&#34;$SECONDS&#34;
+    seconds=$((cmd_end-cmd_start))
+
+    elapsed=&#34;&#34;
+    if [[ $seconds -gt 1 ]]; then
+        elapsed+=&#34;[took &#34;
+        if [[ $seconds -ge 60*60 ]]; then
+            hours=($seconds/(60*60))
+            elapsed+=&#34;$((hours))h&#34;
+            seconds=$((seconds-(hours*60*60)))
+        elif [[ $seconds -ge 60 ]]; then
+            minutes=$((seconds/60))
+            elapsed+=&#34;$((minutes))m&#34;
+            seconds=$((seconds-(minutes*60)))
+        fi
+        elapsed+=&#34;$((seconds))s]&#34;
+    fi
+}
+</code></pre><p>And finally, you want to give the control back to the 2nd line where you can type the command using this variable</p>
+<pre tabindex="0"><code>_linedown=$&#39;\e[1B&#39;
+</code></pre><h4 id="polishing">Polishing</h4>
+<p>Finally, you can use colors most suitable to you for your prompt. You can get a list of available colors in the zsh from <a href="https://github.com/zsh-users/zsh/blob/master/Functions/Misc/colors">github</a>. Also, if you want to reset color at some point, you can use this built-in variable <code>$reset_color</code></p>
+
+<footer>
+</footer>
+
+</html>
