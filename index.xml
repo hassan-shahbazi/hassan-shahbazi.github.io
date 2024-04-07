@@ -6,15 +6,14 @@
     <description>Recent content on Hassan Shahbazi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 04 Dec 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 07 Apr 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>My ZSH Prompt</title>
-      <link>https://shahbazi.fi/posts/my-prompt/</link>
-      <pubDate>Sun, 04 Dec 2022 00:00:00 +0000</pubDate>
+      <title>From Mobile to Cloud. A Journey of a Software Engineer</title>
+      <link>https://shahbazi.fi/posts/developer-devops-journey/</link>
+      <pubDate>Fri, 07 Apr 2023 00:00:00 +0000</pubDate>
       
-      <guid>https://shahbazi.fi/posts/my-prompt/</guid>
-      <description>If you are a person like me, who enjoys working with CLI for most of tasks, this post might be interesting to you. In this post, I would like to share and explain the prompt I have for zsh, which is fast, cross-platform, and with no dependencies.
-What is a prompt I don&amp;rsquo;t know the exact defination of it, but in short words, it is what you see when open a terminal window.</description>
+      <guid>https://shahbazi.fi/posts/developer-devops-journey/</guid>
+      <description>I believe I have already mentioned in my previous posts about the journey I started as a Software Engineer back in 2011. When I was still early in my bachelor&amp;rsquo;s degree, I was asked to join a young team as their iOS developer. It was a great opportunity for me to start my career, and I am very thankful for that. I have learned a lot from that team, and I have always been grateful for the chance they gave me.</description>
     </item>
     
     <item>
