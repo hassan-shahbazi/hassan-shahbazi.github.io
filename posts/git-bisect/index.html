@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/fonts.css">
+    
+    <title>Hassan Shahbazi</title>
+    <link rel="icon" type="image/png" href="/assets/img/favicon.png" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    
+	
+</head>
+
+
+<html>
+<h1>Save the day with git bisect</h1>
+<p class="post-meta">
+    <time itemprop="datePublished">
+        <code>May 24, 2023</code>
+        <a class="muted small" href="https://shahbazi.fi/"><code>&nbsp; by Hassan Shahbazi</code></a>
+    </time>
+</p>
+
+<p><code>Git</code> is probably the one single skill/technology keyword that can be found on CV of almost all people working in the Software industry. It is one of the first things everyone learn even before starting to write the code. This is mostly because of the fact that it is the most widely used version control system, it is easy to learn, and it is very powerful. Here in this article, I don&rsquo;t intend to discuss about complex or very advanced features, but to talk about a real scenario that I faced recently and how I used one of these features to solve the problem, even though I should simplify the case. But to start, <strong>have you ever heard of <code>git bisect</code>?</strong>
+<br/><br/></p>
+<h2 id="the-case">The Case</h2>
+<p>If you have ever worked on a repository in collaboration with at least one other developer, you should be familiar with cases like conflicts when more than one person works on the same content. In these cases, <code>git</code> asks you to choose either of the versions to continue. Sounds like it can avoid the disaster before it happens. But what if you don&rsquo;t touch the same content, but yet manage to conflict with each other&rsquo;s work? Let me explain the case with a simple example.</p>
+<p>I have a very simple git repository with a single text file. The file content is just some simple strings that are appended by each developer depending on the situation. (Think of the file as a <em>CHANGELOG</em> file). This is the content of the file:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>By Hassan - line <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>By Hassan - line <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span>By John - line <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>By Hassan - line <span style="color:#ae81ff">3</span>
+</span></span></code></pre></div><p>And we have a bash script that reads the file and prints number of lines per each developer. This is the content of the script. It basically fails if the given developer name has no lines in the file.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#! /bin/bash
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#66d9ef">$(</span>grep <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> file.txt | wc -l<span style="color:#66d9ef">)</span> -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>So our repository looks like this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ls -lha
+</span></span><span style="display:flex;"><span>total 48K
+</span></span><span style="display:flex;"><span>drwxr-xr-x   <span style="color:#ae81ff">3</span> USER GROUP 4.0K May <span style="color:#ae81ff">10</span> 09:56 ./
+</span></span><span style="display:flex;"><span>drwxrwxrwt <span style="color:#ae81ff">411</span> USER GROUP  36K May <span style="color:#ae81ff">10</span> 09:55 ../
+</span></span><span style="display:flex;"><span>-rw-r--r--   <span style="color:#ae81ff">1</span> USER GROUP    <span style="color:#ae81ff">0</span> May <span style="color:#ae81ff">10</span> 09:55 file.txt
+</span></span><span style="display:flex;"><span>-rwxr-xr-x   <span style="color:#ae81ff">1</span> USER GROUP  <span style="color:#ae81ff">122</span> May <span style="color:#ae81ff">10</span> 10:16 script.sh*
+</span></span><span style="display:flex;"><span>drwxr-xr-x   <span style="color:#ae81ff">7</span> USER GROUP 4.0K May <span style="color:#ae81ff">10</span> 09:56 .git/
+</span></span></code></pre></div><p><br/><br/></p>
+<h2 id="the-problem">The Problem</h2>
+<p>Some weeks ago, our small team added a new junior to the team who has to deal with some code, and then update the <code>file.txt</code> with their content. Due to miscommunication, the new member assumed that they should change the style so the content of the file doesn&rsquo;t contain names anymore. This change was not seen during the PR review and went up directly to the production. Looking at the <code>git log</code>, you see that the faulty commit is somewhere in the history, but no-one yet knows why tests are failing now.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git log --pretty<span style="color:#f92672">=</span>format:<span style="color:#e6db74">&#34;%h%x09%an%x09%s
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">3ca5ac0 John   Add new line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">113c956 Hassan Add new line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">6838abf John   Add new line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">176606b Junior Update format
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">0ddf3cf Hassan Add new line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">e71809e Hassan Add new line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">ae217e2 John   Add new line
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">237198d Hassan Add Script and File
+</span></span></span></code></pre></div><p><br/><br/></p>
+<h2 id="troubleshooting">Troubleshooting</h2>
+<p>I, as a senior developer, now have to find when the issue introduced. I don&rsquo;t have any initial idea when and how this happened. As far as I know, everything had gone according to the plan until the problem started to show up. I may have a rough estimate about the healthy commits where the code was working just fine, but I don&rsquo;t know when things failed and how many commits are made on top of them. So here comes the <code>git bisect</code> to the rescue.</p>
+<h4 id="step-1-start-the-bisect">Step 1: Start the bisect</h4>
+<p>First thing to do is to start the bisect for the range starting from the point we are sure that is working fine and ending to the point we know things are broken. I start from commit <code>e71809e</code> as the place I am sure things were working, and end to <code>HEAD</code> which is the last commit in the history and is broken for sure.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git bisect start 3ca5ac0 e71809e~
+</span></span><span style="display:flex;"><span>Bisecting: <span style="color:#ae81ff">2</span> revisions left to test after this <span style="color:#f92672">(</span>roughly <span style="color:#ae81ff">2</span> steps<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>176606bcdecd06e7aef5719bc50401b9af818a30<span style="color:#f92672">]</span> Update format
+</span></span></code></pre></div><h4 id="step-2-run-test-for-each-commit">Step 2: Run test for each commit</h4>
+<p>And now I can start checking which commit is the one that breaks the script. I do that by <code>git bisect run</code> as below:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git bisect run ./script.sh <span style="color:#e6db74">&#34;Hassan&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>running  <span style="color:#e6db74">&#39;./script.sh&#39;</span> <span style="color:#e6db74">&#39;Hassan&#39;</span>
+</span></span><span style="display:flex;"><span>Bisecting: <span style="color:#ae81ff">0</span> revisions left to test after this <span style="color:#f92672">(</span>roughly <span style="color:#ae81ff">1</span> step<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">[</span>0ddf3cfe17e37a640a9f2dda7f406e46f279000d<span style="color:#f92672">]</span> Add new line
+</span></span><span style="display:flex;"><span>running  <span style="color:#e6db74">&#39;./script.sh&#39;</span> <span style="color:#e6db74">&#39;Hassan&#39;</span>
+</span></span><span style="display:flex;"><span>176606bcdecd06e7aef5719bc50401b9af818a30 is the first bad commit
+</span></span><span style="display:flex;"><span>commit 176606bcdecd06e7aef5719bc50401b9af818a30
+</span></span><span style="display:flex;"><span>Author: Junior &lt;junior@our-team.com&gt;
+</span></span><span style="display:flex;"><span>Date:   Fri May <span style="color:#ae81ff">10</span> 11:04:35 <span style="color:#ae81ff">2024</span> +0300
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Update format
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    file.txt | <span style="color:#ae81ff">5</span> +----
+</span></span><span style="display:flex;"><span>    <span style="color:#ae81ff">1</span> file changed, <span style="color:#ae81ff">1</span> insertion<span style="color:#f92672">(</span>+<span style="color:#f92672">)</span>, <span style="color:#ae81ff">4</span> deletions<span style="color:#f92672">(</span>-<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>bisect found first bad commit%
+</span></span></code></pre></div><h4 id="step-3-check-findings">Step 3: Check findings</h4>
+<p>While we can already see the first problematic commit, we can see more by checking logs</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git bisect log
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># bad: [3ca5ac00780b0bad6bc1769af47450cb45ce9136] Add new line</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># good: [ae217e2d5d19e86f84b399a5cf73be9510dd9c0e] Add new line</span>
+</span></span><span style="display:flex;"><span>git bisect start <span style="color:#e6db74">&#39;3ca5ac0&#39;</span> <span style="color:#e6db74">&#39;e71809e~&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># bad: [176606bcdecd06e7aef5719bc50401b9af818a30] Update format</span>
+</span></span><span style="display:flex;"><span>git bisect bad 176606bcdecd06e7aef5719bc50401b9af818a30
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># good: [0ddf3cfe17e37a640a9f2dda7f406e46f279000d] Add new line</span>
+</span></span><span style="display:flex;"><span>git bisect good 0ddf3cfe17e37a640a9f2dda7f406e46f279000d
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># first bad commit: [176606bcdecd06e7aef5719bc50401b9af818a30] Update format</span>
+</span></span></code></pre></div><h4 id="step-4-end-the-bisect">Step 4: End the bisect</h4>
+<p>Now that we are in the faulty commit, we should fix our code. We can now update our script to match the new style in the <code>file.txt</code>, to avoid the failure in the system.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#! /bin/bash -e
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">if</span> <span style="color:#f92672">[[</span> <span style="color:#66d9ef">$(</span>grep <span style="color:#e6db74">&#34;line&#34;</span> file.txt | wc -l<span style="color:#66d9ef">)</span> -eq <span style="color:#ae81ff">0</span> <span style="color:#f92672">]]</span>; <span style="color:#66d9ef">then</span>
+</span></span><span style="display:flex;"><span>    exit <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">fi</span>
+</span></span></code></pre></div><p>This fix would be then committed once <code>git bisect reset</code> that would end the bisect.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ git bisect reset
+</span></span><span style="display:flex;"><span>$ git commit -am <span style="color:#e6db74">&#34;Fix the script to match the new format&#34;</span>
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p><code>git bisect</code> can be a life-saver when you have to dig into a long history or testing your changes can be timely. Just to imagine, you can think of the above example with 100 commits where each execution of <code>./script.sh</code> could have taken 10 minutes. In this case, you definitely don&rsquo;t want to do all the checks manually.</p>
+<p>And at the end and as I mentioned in the beginning, <code>git</code> can be a tricky technology for many of us, as despite its simplicity, there are some features of that are not used very often despite their magical power in certain situations. I encourage you to watch the 2 following videos if you believe you know <code>git</code>, even though they may not immediately be useful to you.</p>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=aolI_Rz0ZqY&amp;t=2215s">So You Think You Know Git? - Part 1</a></li>
+<li><a href="https://www.youtube.com/watch?v=Md44rcw13k4">So You Think You Know Git? - Part 2</a></li>
+</ul>
+
+<footer>
+</footer>
+
+</html>
