@@ -6,14 +6,14 @@
     <description>Recent content on Hassan Shahbazi</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 May 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 24 May 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://shahbazi.fi/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Save the day with git bisect</title>
       <link>https://shahbazi.fi/posts/git-bisect/</link>
-      <pubDate>Wed, 24 May 2023 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 24 May 2024 00:00:00 +0000</pubDate>
       
       <guid>https://shahbazi.fi/posts/git-bisect/</guid>
-      <description>Git is probably the one single skill/technology keyword that can be found on CV of almost all people working in the Software industry. It is one of the first things everyone learn even before starting to write the code. This is mostly because of the fact that it is the most widely used version control system, it is easy to learn, and it is very powerful. Here in this article, I don&amp;rsquo;t intend to discuss about complex or very advanced features, but to talk about a real scenario that I faced recently and how I used one of these features to solve the problem, even though I should simplify the case.</description>
+      <description>Git is probably the one single skill/technology keyword that can be found on CV of almost all people working in the Software industry. It is one of the first things everyone learn even before starting to write the code. This is mostly because of the fact that it is the most widely used version control system, it is easy to learn, and it is very powerful. Here in this article, I don’t intend to discuss about complex or very advanced features, but to talk about a real scenario that I faced recently and how I used one of these features to solve the problem, even though I should simplify the case.</description>
     </item>
     
     <item>
