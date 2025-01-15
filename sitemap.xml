@@ -3,10 +3,16 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://shahbazi.fi/</loc>
-    <lastmod>2024-05-24T00:00:00+00:00</lastmod>
+    <lastmod>2025-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://shahbazi.fi/posts/daybook/</loc>
+    <lastmod>2025-01-15T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://shahbazi.fi/posts/</loc>
-    <lastmod>2024-05-24T00:00:00+00:00</lastmod>
+    <lastmod>2025-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://shahbazi.fi/posts/google-photos-to-s3/</loc>
+    <lastmod>2024-12-04T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://shahbazi.fi/posts/git-bisect/</loc>
     <lastmod>2024-05-24T00:00:00+00:00</lastmod>
