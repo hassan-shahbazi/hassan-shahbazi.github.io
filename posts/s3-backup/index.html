@@ -23,19 +23,19 @@
     </time>
 </p>
 
-<p>This might be an slightly different post of mine as it is not directly related to my work. However, I believe it is a good example of how I used my technical skills in my personal life. The case was reletavely simple: I wanted to save money and yet keep my data safe in the cloud. Let me explain the situation first.</p>
+<p>This might be a slightly different post of mine as it is not directly related to my work. However, I believe it is a good example of how I used my technical skills in my personal life. The case was relatively simple: I wanted to save money and yet keep my data safe in the cloud. Let me explain the situation first.</p>
 <h3 id="situation">Situation</h3>
-<p>For a long time I had chosen to keep separate online archives for my photos and data. I used <em>Google Photos</em> for my old photos from the old life, the time that I was not happy to remind on daily or even monthly basis. Then I decided to use <em>Amazon Photos</em> for the new life and the contents I felt happy to look at every day and sharing with my friends. Since I do take a ton of photos, I had to buy the permium account so soon, 2$/month for 100GB.</p>
+<p>For a long time I had chosen to keep separate online archives for my photos and data. I used <em>Google Photos</em> for my old photos from the old life, the time that I was not happy to remind on daily or even monthly basis. Then I decided to use <em>Amazon Photos</em> for the new life and the contents I felt happy to look at every day and sharing with my friends. Since I do take a ton of photos, I had to buy the premium account so soon, 2$/month for 100GB.</p>
 <p>Photo is not the only data I keep online. I also used <em>Google Drive</em> for keeping old docs such as documents about my university and <em>OneDrive</em> for some other docs about the college. I didn&rsquo;t have any recent uses for these files, yet they were not useless enough to be removed. On the other hand, for more frequently used docs I had to switch to <em>iCloud</em>. It was easy to use as I was mainly using my iPhone and iPad and I could get access to them with least efforts. Since I had already separated photos, I never had to worry about the limit of 5GB storage on iCloud.</p>
 <p>I think you now have a better idea of the problem: <strong>it was such a mess</strong>. Even though I was not eager to review some of them, I couldn&rsquo;t afford to lose them. Then there came another obstacle: <em>I had to switch from my old iPhone to an Android device in the past winter</em>, so you can imagine the headaches of syncing and accessing my day-to-day docs from the new device. Problems in synchronization, data being all over the place, and the increasing costs of Amazon Photos made me think about a solution: <strong>How about archiving all my data in one place?</strong></p>
 <h3 id="solution">Solution</h3>
 <p>So if you have read my other posts (or even check the homepage of this blog), you know that I am an DevOps engineer that deal with Cloud at a daily basis. It is my job to find solutions for the cases above, and I am paid for doing so. So I started thinking with myself: why can&rsquo;t I see myself as my own employer? How can I help myself with this problem? So the journey began.</p>
 <p>I started by reading about <strong>S3 Class</strong> options on AWS. I knew S3 and I liked how it works, but a general purpose bucket would be too expensive for me as I had around 200GB of data which I don&rsquo;t use frequently for the majority of them. So I started with the following plan:</p>
 <h4 id="1-gather-the-data">1. Gather the data</h4>
-<p>I first started by gathering all of my data. It wasn&rsquo;t easy, because as much as these online services encourage you to bring your data, they make it as hard as possible to take them away. Heh! <strong>this is another reason for my journy!</strong></p>
-<p>So I started slowly to download my data, my Google photos, my Amazon photos, my documents on iCloud and Google and OneDrive. It tooks several days for this process, but I finally managed to organize them in separate folders.</p>
+<p>I first started by gathering all of my data. It wasn&rsquo;t easy, because as much as these online services encourage you to bring your data, they make it as hard as possible to take them away. Heh! <strong>this is another reason for my journey!</strong></p>
+<p>So I started slowly to download my data, my Google photos, my Amazon photos, my documents on iCloud and Google and OneDrive. It took several days for this process, but I finally managed to organize them in separate folders.</p>
 <h4 id="2-find-and-remove-duplicates">2. Find and remove duplicates</h4>
-<p>If you have ever worked with Cloud, you know that they mostly charge you based on either the number of items or the size of your data. Apart from that, who wants to see a same photo being duplicated in their gallary? So next step was to find and remove duplicates. For this, I made a simple <code>Python</code> script to iterate over folders, find duplicated files and then move them into a recyle bin for later review. Considering the number of items and size, this took almost a day on my M1 Mac Mini to finish, but I was quite happy with the results.</p>
+<p>If you have ever worked with Cloud, you know that they mostly charge you based on either the number of items or the size of your data. Apart from that, who wants to see a same photo being duplicated in their gallery? So next step was to find and remove duplicates. For this, I made a simple <code>Python</code> script to iterate over folders, find duplicated files and then move them into a recycle bin for later review. Considering the number of items and size, this took almost a day on my M1 Mac Mini to finish, but I was quite happy with the results.</p>
 <h4 id="3-archive-the-data">3. Archive the data</h4>
 <p>This was another important step. If you ever tried to use <strong>S3 Glacier</strong> classes, you know that you are charged for two things:</p>
 <ol>
@@ -44,7 +44,7 @@
 </ol>
 <p>Which in practice means you need to use &ldquo;bulk uploads&rdquo; to avoid transferring millions of requests (well if you don&rsquo;t want to go bankrupt). Even though this has a downside for specific cases, in my case it was totally fine. If in the future I decide to review those old files, I don&rsquo;t mind downloading all of the archive and extract it. This, however, doesn&rsquo;t look like a good plan for a web service.</p>
 <h4 id="4-find-the-class">4. Find the class</h4>
-<p>I had to choose which classes of S3 to use. They may seem all the same but in fact they offer different price ranges for different use-cases. To start I decided to organizing my data with in these categoeis:</p>
+<p>I had to choose which classes of S3 to use. They may seem all the same but in fact they offer different price ranges for different use-cases. To start I decided to organizing my data with in these categories:</p>
 <ul>
 <li>
 <p><strong>Long-term archives of Google Photos</strong>: I really don&rsquo;t expect to touch these files in any near future. They are there, they are mine, they are my history, but I am not eager to see them anytime soon, at least not in a foreseeable future.</p>
@@ -62,7 +62,7 @@
 <p><strong>S3 Glacier Deep Archive</strong>: Reliable cheap archival storage for my old life records. I don&rsquo;t mind waiting for days to download them even though I have no such plans in mind. So I can afford to keep them there for the minimum required time (6 months) and thus, save a lot of money.</p>
 </li>
 <li>
-<p><strong>S3 Glacier Instant Retrival</strong>: For anything that can be archived but might be needed more frequently than the deep archive. It is slightly more expensive than the deep archive, but it has less waiting time for retrieval and it can be accessed relatively faster.</p>
+<p><strong>S3 Glacier Instant Retrieval</strong>: For anything that can be archived but might be needed more frequently than the deep archive. It is slightly more expensive than the deep archive, but it has less waiting time for retrieval and it can be accessed relatively faster.</p>
 </li>
 <li>
 <p><strong>Google Drive</strong>: For few docs remained and few recent Photos that I enjoy to see every day, I decided to keep sticking to the free plan of Google Drive. The old albums will are reviewed on yearly basis and move to S3 if I find them less enjoyable.</p>
